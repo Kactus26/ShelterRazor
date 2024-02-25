@@ -1,11 +1,17 @@
 using Microsoft.EntityFrameworkCore;
 using ShelterRazor.Data;
+using ShelterRazor.Interfaces;
+using ShelterRazor.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddTransient<Seed>();
 builder.Services.AddRazorPages();
+builder.Services.AddScoped<IOwner, OwnerRepository>();
+builder.Services.AddScoped<IPet, PetRepository>();
+builder.Services.AddScoped<IProduct, ProductRepository>();
+builder.Services.AddScoped<IPetShelter, PetShelterRepository>();
 builder.Services.AddDbContext<DataContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));

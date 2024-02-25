@@ -1,12 +1,24 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using ShelterRazor.Interfaces;
+using ShelterRazor.Models;
 
 namespace ShelterRazor.Pages
 {
     public class SheltersModel : PageModel
     {
-        public void OnGet()
+        private readonly IPetShelter _shelterRepository;
+
+        public SheltersModel(IPetShelter shelterRepository)
         {
+            _shelterRepository = shelterRepository;
+        }
+
+        public ICollection<PetShelter> petShelters { get; set; }
+
+        public async void OnGetAsync()
+        {
+            petShelters = _shelterRepository.PetShelters().GetAwaiter().GetResult();
         }
     }
 }
