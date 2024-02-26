@@ -16,9 +16,9 @@ namespace ShelterRazor.Pages
 
         public ICollection<PetShelter> petShelters { get; set; }
 
-        public async void OnGetAsync()
+        public async Task OnGetAsync()
         {
-            petShelters = _shelterRepository.PetShelters().GetAwaiter().GetResult();
+            petShelters = await _shelterRepository.PetShelters();
         }
     }
 }

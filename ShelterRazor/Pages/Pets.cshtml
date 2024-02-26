@@ -1,0 +1,31 @@
+﻿@page
+@model ShelterRazor.Pages.PetsModel
+@{
+    <style>
+        .center{
+
+        }
+    </style>
+
+<div class="d-flex">
+    @foreach (var item in Model.Pets)
+    {
+        var imagesPath = $"{item.ImgSrc}";
+  
+        <div class="card-group">
+            <div class="card">
+                <img class="card-img-top" src="@imagesPath" alt="Pet image">
+                <div class="card-body">
+                    <h5 class="card-title">@item.Name</h5>
+                    <p class="card-text">Age: @item.Age</p>
+                    <p class="card-text">Gender: @item.Gender</p>
+                    <p class="card-text">Breed: @item.Breed</p>
+                    <div class="d-flex justify-content-center">
+                        <button type="button" class="btn btn-success">Choose</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+}

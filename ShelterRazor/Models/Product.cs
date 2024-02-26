@@ -6,6 +6,7 @@
         public string Name { get; set; }
         public string Description { get; set; }
         public string Manufacturer { get; set; }
+        public string ImgSrc { get; set; }
         public float Value { get; set; }
         public ICollection<PetShelter>? PetShelters { get; set;}
     }
