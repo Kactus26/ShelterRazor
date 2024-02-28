@@ -17,6 +17,7 @@ namespace ShelterRazor.DTO
         public string? OwnerAddress { get; set; }
         public int PetShelterId { get; set; }
         public string PetShelterAddress { get; set; }
+        public string ImgSrc { get; set; }
     }
 
     public class PetWhithPetShelterDTO

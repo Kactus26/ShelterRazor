@@ -12,6 +12,10 @@ builder.Services.AddScoped<IOwner, OwnerRepository>();
 builder.Services.AddScoped<IPet, PetRepository>();
 builder.Services.AddScoped<IProduct, ProductRepository>();
 builder.Services.AddScoped<IPetShelter, PetShelterRepository>();
+builder.Services.Configure<RouteOptions>(options =>
+{
+    options.LowercaseUrls = true;
+});
 builder.Services.AddDbContext<DataContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));

@@ -26,7 +26,7 @@ namespace ShelterRazor.Repository
 
         public async Task<ICollection<PetDTO>> GetAllPets()
         {
-            return await _context.Pets.Include(pet => pet.Owner)
+            return await _context.Pets.Include(pet => pet.Owner).OrderBy(x=>x.Owner)
             .Select(x => new PetDTO
             {
                 Id = x.Id,
@@ -41,7 +41,8 @@ namespace ShelterRazor.Repository
                 OwnerSurName = x.Owner.SurName,
                 OwnerAddress = x.Owner.Address,
                 PetShelterId = x.PetShelter.Id,
-                PetShelterAddress = x.PetShelter.Address
+                PetShelterAddress = x.PetShelter.Address,
+                ImgSrc = x.ImgSrc             
             }).ToListAsync();
         }
 

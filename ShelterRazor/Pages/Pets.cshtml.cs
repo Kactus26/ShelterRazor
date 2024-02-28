@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using ShelterRazor.DTO;
 using ShelterRazor.Interfaces;
 using ShelterRazor.Models;
 using ShelterRazor.Repository;
@@ -15,11 +16,11 @@ namespace ShelterRazor.Pages
             _petRepository = petRepository;
         }
 
-        public ICollection<Pet> Pets { get; set; }
+        public ICollection<PetDTO> Pets { get; set; }
 
         public async Task OnGetAsync()
         {
-            Pets = await _petRepository.GetPetsWithoutOwner();
+            Pets = await _petRepository.GetAllPets();
         }
     }
 }

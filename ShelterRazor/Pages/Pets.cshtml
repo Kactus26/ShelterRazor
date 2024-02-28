@@ -2,30 +2,58 @@
 @model ShelterRazor.Pages.PetsModel
 @{
     <style>
-        .center{
-
+        .flex-wrap{
+            flex-wrap: wrap;
+        }
+        .title{
+            margin-top: 70px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .img-param{
+            height: 250px;
+            width: 400px;
+        }
+        .about-animal {
+            width: 300px;
+        }
+        .btn{
+            margin-bottom: 20px;
+        }
+        .card-group{
+            margin-bottom: 50px;
         }
     </style>
+    <h1 class="title">All Pets</h1>
+    <div class="d-flex flex-lg-wrap justify-content-around flex-wrap">
+        @foreach (var item in Model.Pets)
+        {
+            var imagesPath = $"{item.ImgSrc}";
 
-<div class="d-flex">
-    @foreach (var item in Model.Pets)
-    {
-        var imagesPath = $"{item.ImgSrc}";
-  
-        <div class="card-group">
-            <div class="card">
-                <img class="card-img-top" src="@imagesPath" alt="Pet image">
-                <div class="card-body">
-                    <h5 class="card-title">@item.Name</h5>
-                    <p class="card-text">Age: @item.Age</p>
-                    <p class="card-text">Gender: @item.Gender</p>
-                    <p class="card-text">Breed: @item.Breed</p>
+            <div class="card-group">
+                <div class="card">
+                    <img class="card-img-top img-param" src="@imagesPath" alt="Pet image" />
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Name</h5>
+                        <span class="card-text">Age: @item.Age</span>
+                        <span class="card-text">Gender: @item.Gender</span>
+                        <span class="card-text">Kind: @item.KindOfAnimal</span>
+                        <span class="card-text">Breed: @item.Breed</span><br />
+                        <span class="card-text">Pet shelter address: @item.PetShelterAddress</span><br />
+                        <div>
+                            @if (item.OwnerName != null)
+                            {
+                                <span class="card-text">Date of taking: @item.DateOfTaking</span><br/>
+                                <span class="card-text">Owner name: @item.OwnerName</span><br/>
+                                <span class="card-text">Owner address: @item.OwnerAddress</span><br />
+                            }
+                        </div>
+                    </div>
                     <div class="d-flex justify-content-center">
-                        <button type="button" class="btn btn-success">Choose</button>
+                        <a asp-page="/DetailedPet" asp-route-id="@item.Id" class="btn btn-success">Choose</a>
                     </div>
                 </div>
             </div>
-        </div>
-    }
-</div>
+        }
+    </div>
 }
