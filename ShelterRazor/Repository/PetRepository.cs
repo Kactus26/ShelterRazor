@@ -24,6 +24,11 @@ namespace ShelterRazor.Repository
                 return false;
         }
 
+        public async Task<Pet> GetPetById(int id)
+        {
+            return await _context.Pets.FirstOrDefaultAsync(x=>x.Id == id);
+        }
+
         public async Task<ICollection<PetDTO>> GetAllPets()
         {
             return await _context.Pets.Include(pet => pet.Owner).OrderBy(x=>x.Owner)

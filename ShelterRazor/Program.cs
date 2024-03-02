@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using ShelterRazor.Services;
 using ShelterRazor.Data;
 using ShelterRazor.Interfaces;
 using ShelterRazor.Repository;
@@ -12,6 +13,7 @@ builder.Services.AddScoped<IOwner, OwnerRepository>();
 builder.Services.AddScoped<IPet, PetRepository>();
 builder.Services.AddScoped<IProduct, ProductRepository>();
 builder.Services.AddScoped<IPetShelter, PetShelterRepository>();
+builder.Services.AddAutoMapper(typeof(MappingProfiles));
 builder.Services.Configure<RouteOptions>(options =>
 {
     options.LowercaseUrls = true;

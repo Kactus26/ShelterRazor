@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{id}"
 @model ShelterRazor.Pages.DetailedPetModel
 @{
     <style>
@@ -9,4 +9,5 @@
         }
     </style>
     <h1 class="title">Detailed Pet</h1>
+    <span>@Model.Pet.Name</span>
 }
