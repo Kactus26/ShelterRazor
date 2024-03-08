@@ -92,6 +92,11 @@ namespace ShelterRazor.Repository
             return await _context.PetShelters.FirstOrDefaultAsync(x => x.Id == shelterId);
         }
 
+        public async Task UpdatePet(Pet updatedPet)
+        {
+            _context.Entry(await _context.Pets.FirstOrDefaultAsync(x => x.Id == updatedPet.Id)).CurrentValues.SetValues(updatedPet);
+        }
+
         public async Task<int> UpdatePetName(int petId, string newName)
         {
             return await _context.Pets.Where(x => x.Id == petId).ExecuteUpdateAsync(x => x.SetProperty(c => c.Name, newName));

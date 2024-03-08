@@ -13,6 +13,7 @@ namespace ShelterRazor.Interfaces
         Task<Pet> GetPetById(int id);
         Task<EntityEntry<Pet>> DeletePet(int petId);
         Task<PetShelter> GetShelterById(int shelterId);
+        Task UpdatePet(Pet updatedPet);
         Task<int> UpdatePetName(int petId, string newName);
         ValueTask<EntityEntry<Pet>> AddPet(Pet pet);
         Task<ICollection<PetDTO>> GetAllPets();

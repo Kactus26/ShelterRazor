@@ -47,6 +47,11 @@ namespace ShelterRazor.Repository
             return await _context.Pets.Include(x=>x.Owner).Where(x => x.Id == petId).FirstOrDefaultAsync();
         }
 
+        public async Task UpdateOwner(Owner updatedOwner)
+        {
+            _context.Entry(await _context.Pets.FirstOrDefaultAsync(x => x.Id == updatedOwner.Id)).CurrentValues.SetValues(updatedOwner);
+        }
+
         public async Task<EntityEntry<Owner>> DeleteOwner(int ownerId)
         {
             return _context.Owners.Remove(await _context.Owners.FirstOrDefaultAsync(x => x.Id == ownerId));
