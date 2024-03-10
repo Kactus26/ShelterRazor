@@ -1,4 +1,5 @@
 ﻿using ShelterRazor.Models;
+using ShelterRazor.Models.Enums;
 
 namespace ShelterRazor.Data
 {
@@ -23,8 +24,14 @@ namespace ShelterRazor.Data
             if (!dataContext.PetShelters.Any())
             {
                 Owner twoPetsOwner = new Owner { Name = "Yurik", SurName = "Bury", Address = "9 Willow Avenue" };
-                Product twoSheltersProducts = new Product { Name = "Cat house", Description = "Big fun house for your little friend", ImgSrc = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4iB5VqYMcwLTte-8_XJS0kRQasWx0v4uOwQ&usqp=CAU",
-                    Manufacturer = "HousesCompany", Value = 125.99F };
+                Product twoSheltersProducts = new Product
+                {
+                    Name = "Cat house",
+                    Description = "Big fun house for your little friend",
+                    ImgSrc = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4iB5VqYMcwLTte-8_XJS0kRQasWx0v4uOwQ&usqp=CAU",
+                    Manufacturer = "HousesCompany",
+                    Value = 125.99F
+                };
 
                 var PetShelters = new List<PetShelter>()
                 {
@@ -33,10 +40,13 @@ namespace ShelterRazor.Data
                         Address = "ul. Berserka 35",
                         Pets = new List<Pet>
                         {
-                            new Pet { Name = "Aki", Age = 2, Gender = 'M', KindOfAnimal = "Dog", Breed = "Haski", ImgSrc="https://ethnomir.ru/upload/medialibrary/a8a/otkuda_vzyalis_khaski_1.jpg"},
-                            new Pet { Name = "Miku", Age = 1, Gender = 'F', KindOfAnimal = "Cat", Breed = "British", DateOfTaking = new DateOnly(2024,01,01), ImgSrc = "https://moizver.com/upload/medialibrary/f5a/f5a1cbcd9bfdf5634edfa557c8662a1a.jpg",
+                            new Pet { Name = "Aki", Age = 2, Gender = 'M', ImgSrc="https://ethnomir.ru/upload/medialibrary/a8a/otkuda_vzyalis_khaski_1.jpg",
+                                KindOfAnimal = KindsOfAnimal.Dog, Breed = Breeds.Haski},
+                            new Pet { Name = "Miku", Age = 1, Gender = 'F', DateOfTaking = new DateOnly(2024,01,01), ImgSrc = "https://moizver.com/upload/medialibrary/f5a/f5a1cbcd9bfdf5634edfa557c8662a1a.jpg",
+                                KindOfAnimal = KindsOfAnimal.Cat, Breed = Breeds.British,
                                 Owner = new Owner{ Name = "Alex", SurName = "Baginsky", Address = "13 Maple Street"}},
-                            new Pet { Name = "Pirozok", Age = 0, Gender = 'M', KindOfAnimal = "Hamster", Breed = "Jungaryk", DateOfTaking = new DateOnly(2023,03,28), ImgSrc = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTB7V1_ixcevL4KHwKkBVhs0e-nmDtK7tx6SQ&usqp=CAU",
+                            new Pet { Name = "Pirozok", Age = 0, Gender = 'M', DateOfTaking = new DateOnly(2023,03,28), ImgSrc = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTB7V1_ixcevL4KHwKkBVhs0e-nmDtK7tx6SQ&usqp=CAU",
+                                KindOfAnimal = KindsOfAnimal.Hamster, Breed = Breeds.Jungaryk,
                                 Owner = new Owner{ Name = "Yaroslav", SurName = "Yanovich", Address = "21 Pine Road"}}
                         },
                         Products = new List<Product>()
@@ -52,10 +62,13 @@ namespace ShelterRazor.Data
                         Address = "ul. Mrkanova 2",
                         Pets = new List<Pet>
                         {
-                            new Pet { Name = "Bella", Age = 3, Gender = 'F', KindOfAnimal = "Dog", Breed = "Labrador", ImgSrc = "https://www.wagr.ai/cdn/shop/articles/dog-breed-labrador-retriever-548968.webp?v=1671205002"},
-                            new Pet { Name = "Whiskers", Age = 2, Gender = 'M', KindOfAnimal = "Cat", Breed = "Siamese", ImgSrc = "https://www.purina.co.uk/sites/default/files/styles/square_medium_440x440/public/2022-06/Siamese-Cat_0.jpg?itok=Qy1J6ZDS",
+                            new Pet { Name = "Power", Age = 3, Gender = 'F', ImgSrc = "https://www.wagr.ai/cdn/shop/articles/dog-breed-labrador-retriever-548968.webp?v=1671205002",
+                                KindOfAnimal = KindsOfAnimal.Dog, Breed = Breeds.Labrador},
+                            new Pet { Name = "Whiskers", Age = 2, Gender = 'M', ImgSrc = "https://www.purina.co.uk/sites/default/files/styles/square_medium_440x440/public/2022-06/Siamese-Cat_0.jpg?itok=Qy1J6ZDS",
+                                KindOfAnimal = KindsOfAnimal.Cat, Breed = Breeds.Siamese,
                                 DateOfTaking = new DateOnly(2023,10,15), Owner = twoPetsOwner},
-                            new Pet { Name = "Nibbles", Age = 1, Gender = 'M', KindOfAnimal = "Hamster", Breed = "Syrian", ImgSrc = "https://cdn.shortpixel.ai/spai/q_glossy+w_1082+to_webp+ret_img/woodgreen.org.uk/wp-content/uploads/2021/11/hamster_advice_article.jpeg",
+                            new Pet { Name = "Nibbles", Age = 1, Gender = 'M', ImgSrc = "https://cdn.shortpixel.ai/spai/q_glossy+w_1082+to_webp+ret_img/woodgreen.org.uk/wp-content/uploads/2021/11/hamster_advice_article.jpeg",
+                                KindOfAnimal = KindsOfAnimal.Hamster, Breed = Breeds.Syrian,
                                 DateOfTaking = new DateOnly(2023,10,15), Owner = twoPetsOwner}
                         },
                         Products = new List<Product>()

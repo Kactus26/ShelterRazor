@@ -10,7 +10,8 @@ namespace ShelterRazor.Interfaces
         Task<ICollection<Owner>> GetOwners();
         Task<bool> PetHasOwner(int petId);
         Task<Owner> GetOwnerById(int ownerId);
-        Task UpdateOwner(Owner updatedOwner);
+/*        Task UpdateOwner(Owner updatedOwner);
+*/        
         Task<EntityEntry<Owner>> DeleteOwner(int ownerId);
         Task<Pet> GetPet(int petId);
         ValueTask<EntityEntry<Owner>> AddOwner(Owner owner);

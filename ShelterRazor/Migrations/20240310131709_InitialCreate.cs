@@ -32,7 +32,8 @@ namespace ShelterRazor.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ImgSrc = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -48,6 +49,7 @@ namespace ShelterRazor.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Manufacturer = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ImgSrc = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Value = table.Column<float>(type: "real", nullable: false)
                 },
                 constraints: table =>
@@ -64,8 +66,9 @@ namespace ShelterRazor.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Age = table.Column<int>(type: "int", nullable: false),
                     Gender = table.Column<string>(type: "nvarchar(1)", nullable: false),
-                    KindOfAnimal = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Breed = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    KindOfAnimal = table.Column<int>(type: "int", nullable: false),
+                    Breed = table.Column<int>(type: "int", nullable: false),
+                    ImgSrc = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DateOfTaking = table.Column<DateOnly>(type: "date", nullable: true),
                     OwnerId = table.Column<int>(type: "int", nullable: true),
                     PetShelterId = table.Column<int>(type: "int", nullable: true)

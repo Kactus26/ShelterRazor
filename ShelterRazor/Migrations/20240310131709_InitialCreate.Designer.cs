@@ -12,8 +12,8 @@ using ShelterRazor.Data;
 namespace ShelterRazor.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240226172241_AddImagesToAllModels")]
-    partial class AddImagesToAllModels
+    [Migration("20240310131709_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -76,9 +76,8 @@ namespace ShelterRazor.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
-                    b.Property<string>("Breed")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Breed")
+                        .HasColumnType("int");
 
                     b.Property<DateOnly?>("DateOfTaking")
                         .HasColumnType("date");
@@ -91,9 +90,8 @@ namespace ShelterRazor.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("KindOfAnimal")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("KindOfAnimal")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()

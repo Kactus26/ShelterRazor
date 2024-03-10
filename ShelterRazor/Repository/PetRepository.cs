@@ -4,6 +4,7 @@ using ShelterRazor.Data;
 using ShelterRazor.DTO;
 using ShelterRazor.Interfaces;
 using ShelterRazor.Models;
+using ShelterRazor.Models.Enums;
 
 namespace ShelterRazor.Repository
 {
@@ -31,6 +32,8 @@ namespace ShelterRazor.Repository
 
         public async Task<ICollection<PetDTO>> GetAllPets()
         {
+            var test = await _context.Pets.FirstOrDefaultAsync();
+            test.KindOfAnimal = KindsOfAnimal.Hamster;
             return await _context.Pets.Include(pet => pet.Owner).OrderBy(x=>x.Owner)
             .Select(x => new PetDTO
             {
@@ -63,12 +66,12 @@ namespace ShelterRazor.Repository
 
         public async Task<ICollection<Pet>> GetPetsWithBreed(string breed)
         {
-            return await _context.Pets.Where(pet => pet.Breed == breed).Include(pet => pet.PetShelter).Include(pet => pet.Owner).ToListAsync();
+            return await _context.Pets.Where(pet => pet.Breed.ToString() == breed).Include(pet => pet.PetShelter).Include(pet => pet.Owner).ToListAsync();
         }
 
-        public async Task<ICollection<PetDTO>> GetPetsWithKind(string kindOfAnimal)
+        /*public async Task<ICollection<PetDTO>> GetPetsWithKind(string kindOfAnimal)
         {
-            return await _context.Pets.Where(pet => pet.KindOfAnimal == kindOfAnimal).Include(pet => pet.PetShelter).Include(pet => pet.Owner)
+            return await _context.Pets.Where(pet => pet.KindOfAnimal.ToString() == kindOfAnimal).Include(pet => pet.PetShelter).Include(pet => pet.Owner)
             .Select(x => new PetDTO
             {
                 Id = x.Id,
@@ -85,7 +88,7 @@ namespace ShelterRazor.Repository
                 PetShelterId = x.PetShelter.Id,
                 PetShelterAddress = x.PetShelter.Address
             }).ToListAsync();
-        }
+        }*/
 
         public async Task<PetShelter> GetShelterById(int shelterId)
         {

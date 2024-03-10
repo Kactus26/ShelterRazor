@@ -1,4 +1,6 @@
-﻿using ShelterRazor.Models;
+﻿using ShelterRazor.Data;
+using ShelterRazor.Models;
+using ShelterRazor.Models.Enums;
 
 namespace ShelterRazor.DTO
 {
@@ -8,8 +10,8 @@ namespace ShelterRazor.DTO
         public string Name { get; set; }
         public int Age { get; set; }
         public char Gender { get; set; }
-        public string KindOfAnimal { get; set; }
-        public string Breed { get; set; }
+        public KindsOfAnimal KindOfAnimal { get; set; }
+        public Breeds Breed { get; set; }
         public DateOnly? DateOfTaking { get; set; }
         public int? OwnerId { get; set; }
         public string? OwnerName { get; set; }

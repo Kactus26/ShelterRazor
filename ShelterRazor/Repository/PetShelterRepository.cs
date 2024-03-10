@@ -40,7 +40,7 @@ namespace ShelterRazor.Repository
             return petShelter.Products;
         }
 
-        public async Task<ICollection<PetDTO>> PetsInShelter(int shelterId)
+        /*public async Task<ICollection<PetDTO>> PetsInShelter(int shelterId)
         {
             ICollection<PetDTO> pets = await _context.Pets.Include(pet => pet.Owner).Where(x => x.PetShelter.Id == shelterId)
             .Select(x => new PetDTO
@@ -61,7 +61,7 @@ namespace ShelterRazor.Repository
             }).ToListAsync();
 
             return pets;
-        }
+        }*/
 
         public ValueTask<EntityEntry<Pet>> AddPet(Pet pet)
         {

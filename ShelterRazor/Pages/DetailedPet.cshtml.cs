@@ -44,7 +44,6 @@ namespace ShelterRazor.Pages
                 Owner owner = await _ownertRepository.GetOwnerById(Pet.OwnerId.Value);
                 owner.Name = Pet.OwnerName;
                 owner.Address = Pet.OwnerAddress;
-                await _ownertRepository.UpdateOwner(owner);
             }
             await _petRepository.SaveChanges();
             return RedirectToPage("/Pets");
