@@ -54,7 +54,7 @@
                     <span>Gender:</span><input class="card-title" asp-for="Pet.Gender" placeholder="@Model.Pet.Gender" />
                 </div>
                 <div class="flex-coloumn">
-                    <span>Kind:</span><input class="card-title" asp-for="Pet.KindOfAnimal" placeholder="@Model.Pet.KindOfAnimal" />
+                    <span>Kind:</span><select asp-for="Pet.KindOfAnimal" asp-items="Model.Kinds" style="margin-left:5%; margin-bottom:4%;"></select>
                     <span>Breed:</span><input class="card-title" asp-for="Pet.Breed" placeholder="@Model.Pet.Breed" />
                     <span>Pet shelter address:</span><input class="card-title" asp-for="Pet.PetShelterAddress" placeholder="@Model.Pet.PetShelterAddress" />
                 </div>

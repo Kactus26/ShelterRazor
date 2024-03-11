@@ -1,9 +1,11 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using ShelterRazor.DTO;
 using ShelterRazor.Interfaces;
 using ShelterRazor.Models;
+using ShelterRazor.Models.Enums;
 using ShelterRazor.Repository;
 
 namespace ShelterRazor.Pages
@@ -25,9 +27,12 @@ namespace ShelterRazor.Pages
         public IFormFile Photo { get; set; }
         [BindProperty]
         public PetDTO Pet {  get; set; }
+        [BindProperty]
+        public SelectList Kinds { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
+            Kinds = new SelectList(Enum.GetValues(typeof(KindsOfAnimal)).Cast<KindsOfAnimal>().ToList());
             Pet = _mapper.Map<PetDTO>(await _petRepository.GetPetById(id));
             if (Pet == null)
             {
