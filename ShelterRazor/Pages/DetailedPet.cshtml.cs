@@ -15,12 +15,14 @@ namespace ShelterRazor.Pages
         private readonly IPet _petRepository;
         private readonly IOwner _ownertRepository;
         private readonly IMapper _mapper;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public DetailedPetModel(IPet petRepository, IMapper mapper, IOwner ownerRepository)
+        public DetailedPetModel(IPet petRepository, IMapper mapper, IOwner ownerRepository, IWebHostEnvironment webHostEnvironment)
         {
             _petRepository = petRepository;
             _ownertRepository = ownerRepository;
             _mapper = mapper;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         [BindProperty]
@@ -44,16 +46,34 @@ namespace ShelterRazor.Pages
         }
         public async Task<IActionResult> OnPostAsync()
         {
+            if(Photo != null)
+                Pet.ImgSrc = UploadImage();
+
             Pet updatePet = _mapper.Map<Pet>(Pet);
             await _petRepository.UpdatePet(updatePet);
+
             if(Pet.OwnerId != null)
             {
                 Owner owner = await _ownertRepository.GetOwnerById(Pet.OwnerId.Value);
                 owner.Name = Pet.OwnerName;
                 owner.Address = Pet.OwnerAddress;
             }
+
             await _petRepository.SaveChanges();
             return RedirectToPage("/Pets");
+        }
+
+        private string UploadImage()
+        {
+            string imgFolderSrc = Path.Combine(_webHostEnvironment.WebRootPath, "images");
+            string uniqueFileName = Guid.NewGuid().ToString() + "_" + Photo.FileName;
+            string filePath = Path.Combine(imgFolderSrc, uniqueFileName);
+
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                Photo.CopyTo(fileStream);
+            }
+            return filePath;
         }
     }
 }
