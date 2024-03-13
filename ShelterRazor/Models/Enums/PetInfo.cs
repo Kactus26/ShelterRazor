@@ -6,7 +6,7 @@
         Dog,
         Hamster
     }
-    public enum Breeds
+/*    public enum Breeds
     {
         Haski,
         Labrador,
@@ -14,5 +14,5 @@
         Siamese,
         Jungaryk,
         Syrian
-    }
+    }*/
 }

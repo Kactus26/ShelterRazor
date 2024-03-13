@@ -67,7 +67,7 @@ namespace ShelterRazor.Migrations
                     Age = table.Column<int>(type: "int", nullable: false),
                     Gender = table.Column<string>(type: "nvarchar(1)", nullable: false),
                     KindOfAnimal = table.Column<int>(type: "int", nullable: false),
-                    Breed = table.Column<int>(type: "int", nullable: false),
+                    Breed = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ImgSrc = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DateOfTaking = table.Column<DateOnly>(type: "date", nullable: true),
                     OwnerId = table.Column<int>(type: "int", nullable: true),

@@ -10,7 +10,7 @@ namespace ShelterRazor.Models
         public int Age { get; set; }
         public char Gender { get; set; }
         public KindsOfAnimal KindOfAnimal { get; set; }
-        public Breeds Breed { get; set; }
+        public string Breed { get; set; }
         public string ImgSrc { get ; set; }
         public DateOnly? DateOfTaking { get; set; }
         public Owner? Owner { get; set; }

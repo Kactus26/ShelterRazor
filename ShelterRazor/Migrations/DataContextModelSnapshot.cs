@@ -73,8 +73,9 @@ namespace ShelterRazor.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
-                    b.Property<int>("Breed")
-                        .HasColumnType("int");
+                    b.Property<string>("Breed")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateOnly?>("DateOfTaking")
                         .HasColumnType("date");

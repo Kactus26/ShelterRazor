@@ -12,7 +12,7 @@ using ShelterRazor.Data;
 namespace ShelterRazor.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240313144712_InitialCreate")]
+    [Migration("20240313151447_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -76,8 +76,9 @@ namespace ShelterRazor.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
-                    b.Property<int>("Breed")
-                        .HasColumnType("int");
+                    b.Property<string>("Breed")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateOnly?>("DateOfTaking")
                         .HasColumnType("date");

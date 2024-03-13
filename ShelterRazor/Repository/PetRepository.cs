@@ -33,7 +33,6 @@ namespace ShelterRazor.Repository
         public async Task<ICollection<PetDTO>> GetAllPets()
         {
             var test = await _context.Pets.FirstOrDefaultAsync();
-            test.KindOfAnimal = KindsOfAnimal.Hamster;
             return await _context.Pets.Include(pet => pet.Owner).OrderBy(x=>x.Owner)
             .Select(x => new PetDTO
             {
