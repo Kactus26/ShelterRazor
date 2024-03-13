@@ -27,12 +27,14 @@ namespace ShelterRazor.Pages
         public IFormFile Photo { get; set; }
         [BindProperty]
         public PetDTO Pet {  get; set; }
-        [BindProperty]
         public SelectList Kinds { get; set; }
+        public SelectList Breeds { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
             Kinds = new SelectList(Enum.GetValues(typeof(KindsOfAnimal)).Cast<KindsOfAnimal>().ToList());
+            Breeds = new SelectList(Enum.GetValues(typeof(Breeds)).Cast<Breeds>().ToList());
+
             Pet = _mapper.Map<PetDTO>(await _petRepository.GetPetById(id));
             if (Pet == null)
             {
