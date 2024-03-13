@@ -12,7 +12,7 @@ using ShelterRazor.Data;
 namespace ShelterRazor.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240310131709_InitialCreate")]
+    [Migration("20240313144712_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />

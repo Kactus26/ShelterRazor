@@ -73,7 +73,7 @@ namespace ShelterRazor.Pages
             {
                 Photo.CopyTo(fileStream);
             }
-            return filePath;
+            return "/images/" + uniqueFileName;
         }
     }
 }
