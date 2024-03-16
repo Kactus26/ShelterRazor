@@ -3,7 +3,6 @@ using ShelterRazor.Services;
 using ShelterRazor.Data;
 using ShelterRazor.Interfaces;
 using ShelterRazor.Repository;
-using AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 

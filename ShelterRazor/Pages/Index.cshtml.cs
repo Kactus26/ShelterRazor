@@ -1,20 +1,27 @@
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using ShelterRazor.DTO;
+using ShelterRazor.Interfaces;
+using ShelterRazor.Models;
+using ShelterRazor.Repository;
 
 namespace ShelterRazor.Pages
 {
-    public class IndexModel : PageModel
+    public class PetsModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
+        private readonly IPet _petRepository;
 
-        public IndexModel(ILogger<IndexModel> logger)
+        public PetsModel(IPet petRepository)
         {
-            _logger = logger;
+            _petRepository = petRepository;
         }
 
-        public void OnGet()
-        {
+        public ICollection<PetDTO> Pets { get; set; }
 
+        public async Task OnGetAsync()
+        {
+            Pets = await _petRepository.GetAllPets();
         }
     }
 }

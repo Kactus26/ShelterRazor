@@ -44,23 +44,31 @@ namespace ShelterRazor.Pages
         }
         public async Task<IActionResult> OnPostAsync()
         {
-            if(Photo != null)
-                Pet.ImgSrc = UploadImage();
-
-            Pet updatePet = _mapper.Map<Pet>(Pet);
-            await _petRepository.UpdatePet(updatePet);
-
-            if(Pet.OwnerId != null)
+            if (Pet.Name != null)
             {
-                Owner owner = await _ownertRepository.GetOwnerById(Pet.OwnerId.Value);
-                owner.Name = Pet.OwnerName;
-                owner.Address = Pet.OwnerAddress;
+                if (Photo != null)
+                    Pet.ImgSrc = UploadImage();
+
+                Pet updatePet = _mapper.Map<Pet>(Pet);
+                await _petRepository.UpdatePet(updatePet);
+
+            
+
+                if (Pet.OwnerId != null)
+                {
+                    Owner owner = await _ownertRepository.GetOwnerById(Pet.OwnerId.Value);
+                    owner.Name = Pet.OwnerName;
+                    owner.Address = Pet.OwnerAddress;
+                }
+
+                await _petRepository.SaveChanges();
+                TempData["Updated"] = "Pet was successfully updated";
+
+                return RedirectToPage("/Index");
             }
 
-            await _petRepository.SaveChanges();
-            TempData["Updated"] = "Pet was successfully updated";
-
-            return RedirectToPage("/Pets");
+            TempData["Error"] = "Pet name cannot be null";
+            return RedirectToPage("/DetailedPet");
         }
 
         private string UploadImage()

@@ -6,6 +6,7 @@ namespace ShelterRazor.Models
     public class Pet
     {
         public int Id { get; set; }
+        [Required(ErrorMessage = "Name cannot be null")]
         public string Name { get; set; }
         public int Age { get; set; }
         public char Gender { get; set; }

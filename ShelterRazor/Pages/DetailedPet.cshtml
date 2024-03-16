@@ -75,9 +75,8 @@
                     <input asp-for="Photo" class="custom-file-input form-control"/>
                 </div>
                 <button style="margin-left: 28%;" type="submit" class="btn btn-success">Save Changes</button>
+                <span class="text-danger" style="margin-top:0.5%;">@TempData["Error"]</span>
             </div>
         </div>
-        <img class="img-param" src="../scale_600.ppg"/> 
-
     </form>
 }
