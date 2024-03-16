@@ -58,6 +58,8 @@ namespace ShelterRazor.Pages
             }
 
             await _petRepository.SaveChanges();
+            TempData["Updated"] = "Pet was successfully updated";
+
             return RedirectToPage("/Pets");
         }
 
