@@ -20,6 +20,11 @@ namespace ShelterRazor.Repository
             return await _context.PetShelters.ToListAsync();
         }
 
+        public async Task<PetShelter> GetShelterByAddress(string shelterAddress)
+        {
+            return await _context.PetShelters.FirstOrDefaultAsync(x=>x.Address==shelterAddress);
+        }
+
         public async Task<PetShelter> GetShelterById(int shelterId)
         {
             return await _context.PetShelters.FirstOrDefaultAsync(x => x.Id == shelterId);

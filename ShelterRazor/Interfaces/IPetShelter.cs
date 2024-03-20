@@ -7,6 +7,7 @@ namespace ShelterRazor.Interfaces
     public interface IPetShelter
     {
         Task<ICollection<PetShelter>> PetShelters();
+        Task<PetShelter> GetShelterByAddress(string shelterAddress);
         Task<PetShelter> GetShelterById(int shelterId);
 /*        Task<ICollection<PetDTO>> PetsInShelter(int shelterId);
 */        Task<ICollection<Product>> ProductsInShelter(int shelterId);

@@ -15,14 +15,17 @@ namespace ShelterRazor.Pages
         private readonly IPet _petRepository;
         private readonly IOwner _ownertRepository;
         private readonly IMapper _mapper;
+        private readonly IPetShelter _shelterRepository;
         private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public DetailedPetModel(IPet petRepository, IMapper mapper, IOwner ownerRepository, IWebHostEnvironment webHostEnvironment)
+        public DetailedPetModel(IPet petRepository, IMapper mapper, IPetShelter shelterRepository,
+            IOwner ownerRepository, IWebHostEnvironment webHostEnvironment)
         {
             _petRepository = petRepository;
             _ownertRepository = ownerRepository;
             _mapper = mapper;
             _webHostEnvironment = webHostEnvironment;
+            _shelterRepository = shelterRepository;
         }
 
         [BindProperty]
@@ -35,40 +38,96 @@ namespace ShelterRazor.Pages
         {
             Kinds = new SelectList(Enum.GetValues(typeof(KindsOfAnimal)).Cast<KindsOfAnimal>().ToList());
 
-            Pet = _mapper.Map<PetDTO>(await _petRepository.GetPetById(id));
-            if (Pet == null)
+            if (id != 0) 
+            { 
+                Pet = _mapper.Map<PetDTO>(await _petRepository.GetPetById(id));
+                if (Pet == null)
+                {
+                    return RedirectToPage("/Error");
+                }
+            }
+            else
             {
-                return RedirectToPage("/Error");
+                Pet = new PetDTO()
+                {
+                    Gender = 'M'
+                };
             }
             return Page();
         }
         public async Task<IActionResult> OnPostAsync()
         {
-            if (Pet.Name != null)
+            if (Pet.Name == null) { 
+                TempData["Error"] = "Pet name cannot be null";
+                return RedirectToPage("/DetailedPet");
+            } else if (Pet.Gender != 'M' && Pet.Gender != 'F')
             {
-                if (Photo != null)
-                    Pet.ImgSrc = UploadImage();
+                TempData["Error"] = "Pet gender must be M or F";
+                return RedirectToPage("/DetailedPet");
+            } else if (Pet.PetShelterAddress == null)
+            {
+                TempData["Error"] = "Pet shelter address cannot be null";
+                return RedirectToPage("/DetailedPet");
+            } else if (Pet.Breed == null)
+            {
+                TempData["Error"] = "Pet breed cannot be null";
+                return RedirectToPage("/DetailedPet");
+            }
+            if (Photo != null)
+                Pet.ImgSrc = UploadImage();
 
-                Pet updatePet = _mapper.Map<Pet>(Pet);
-                await _petRepository.UpdatePet(updatePet);
 
-            
+            if (Pet.Id == 0)
+            {
+                Pet pet = _mapper.Map<Pet>(Pet);
 
-                if (Pet.OwnerId != null)
+                pet.PetShelter = await _shelterRepository.GetShelterByAddress(Pet.PetShelterAddress);
+                if (pet.PetShelter == null)
                 {
-                    Owner owner = await _ownertRepository.GetOwnerById(Pet.OwnerId.Value);
-                    owner.Name = Pet.OwnerName;
-                    owner.Address = Pet.OwnerAddress;
+                    TempData["Error"] = "Pet shelter with this address dont't exist";
+                    return RedirectToPage("/DetailedPet");
                 }
 
+                await _petRepository.AddPet(pet);
                 await _petRepository.SaveChanges();
                 TempData["Updated"] = "Pet was successfully updated";
 
                 return RedirectToPage("/Index");
             }
+            else
+            {
+                Pet pet = await _petRepository.GetPetById(Pet.Id);
+                pet.PetShelter = await _shelterRepository.GetShelterByAddress(Pet.PetShelterAddress);
 
-            TempData["Error"] = "Pet name cannot be null";
-            return RedirectToPage("/DetailedPet");
+                if (pet.PetShelter == null)
+                {
+                    TempData["Error"] = "Pet shelter with this address dont't exist";
+                    return RedirectToPage("/DetailedPet");
+                }
+
+                pet.Name = Pet.Name;
+                pet.Age = Pet.Age;
+                pet.Gender = Pet.Gender;
+                pet.Breed = Pet.Breed;
+                pet.KindOfAnimal = Pet.KindOfAnimal;
+                pet.ImgSrc = Pet.ImgSrc;
+
+                await _petRepository.UpdatePet(pet);
+            }
+
+            if (Pet.OwnerId != null)
+            {
+                Owner owner = await _ownertRepository.GetOwnerById(Pet.OwnerId.Value);
+                owner.Name = Pet.OwnerName;
+                owner.Address = Pet.OwnerAddress;
+            }
+
+            await _petRepository.SaveChanges();
+            TempData["Updated"] = "Pet was successfully updated";
+
+            return RedirectToPage("/Index");
+
+            
         }
 
         private string UploadImage()
