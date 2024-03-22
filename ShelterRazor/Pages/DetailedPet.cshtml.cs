@@ -90,7 +90,7 @@ namespace ShelterRazor.Pages
 
                 await _petRepository.AddPet(pet);
                 await _petRepository.SaveChanges();
-                TempData["Updated"] = "Pet was successfully updated";
+                TempData["Success"] = "Pet was successfully added";
 
                 return RedirectToPage("/Index");
             }
@@ -123,7 +123,7 @@ namespace ShelterRazor.Pages
             }
 
             await _petRepository.SaveChanges();
-            TempData["Updated"] = "Pet was successfully updated";
+            TempData["Success"] = "Pet was successfully updated";
 
             return RedirectToPage("/Index");
 
