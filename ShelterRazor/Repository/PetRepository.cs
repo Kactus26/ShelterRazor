@@ -4,6 +4,7 @@ using ShelterRazor.Data;
 using ShelterRazor.DTO;
 using ShelterRazor.Interfaces;
 using ShelterRazor.Models;
+using ShelterRazor.Models.Enums;
 
 namespace ShelterRazor.Repository
 {
@@ -105,7 +106,7 @@ namespace ShelterRazor.Repository
                 return _context.SaveChangesAsync();
         }
 
-        public IEnumerable<KindsCount> GetPetKindsCount()
+        public ICollection<KindsCount> GetPetKindsCount()
         {
             return _context.Pets.GroupBy(x => x.KindOfAnimal)
                 .Select(x => new KindsCount()
@@ -113,7 +114,16 @@ namespace ShelterRazor.Repository
                     KindsOfAnimal = x.Key,
                     Count = x.Count()
                 }
-                );
+                ).ToList();
+        }
+
+        public KindsCount GetPetKindsCount(KindsOfAnimal kind)
+        {
+            return new KindsCount()
+            {
+                KindsOfAnimal = kind,
+                Count = _context.Pets.Count(x => x.KindOfAnimal == kind)
+            };
         }
     }
 }

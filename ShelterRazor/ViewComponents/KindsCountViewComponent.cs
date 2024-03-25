@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ShelterRazor.Interfaces;
 using ShelterRazor.Models;
+using ShelterRazor.Models.Enums;
 
 namespace ShelterRazor.ViewComponents
 {
@@ -13,11 +14,15 @@ namespace ShelterRazor.ViewComponents
             _petRepository = petRepository;
         }
 
-        public IViewComponentResult Invoke()
+        public IViewComponentResult Invoke(KindsOfAnimal? kind = null)
         {
-            IEnumerable<KindsCount> result = _petRepository.GetPetKindsCount();
+            ICollection<KindsCount> result = new List<KindsCount>();
 
-            /*            KindsCount result = new KindsCount { Count = 1, KindsOfAnimal = Models.Enums.KindsOfAnimal.Cat };*/
+            if (kind == null)
+                result = _petRepository.GetPetKindsCount();
+            else
+                result.Add(_petRepository.GetPetKindsCount(kind.Value));
+
             return View(result);
         }
     }

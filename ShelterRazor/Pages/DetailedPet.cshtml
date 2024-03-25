@@ -40,6 +40,10 @@
     </style>
     <form method="post" enctype="multipart/form-data">
         <h1 class="title">Detailed Pet</h1>
+
+        @await Component.InvokeAsync("KindsCount", new { kind = Model.Pet.KindOfAnimal })
+
+
         <div class="shadow p-3 mb-5 bg-white rounded">
             <div class="d-flex justify-content-around">
                 @if (Model.Pet.Name != null)

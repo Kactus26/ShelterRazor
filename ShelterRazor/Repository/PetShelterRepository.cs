@@ -44,29 +44,6 @@ namespace ShelterRazor.Repository
             return petShelter.Products;
         }
 
-        /*public async Task<ICollection<PetDTO>> PetsInShelter(int shelterId)
-        {
-            ICollection<PetDTO> pets = await _context.Pets.Include(pet => pet.Owner).Where(x => x.PetShelter.Id == shelterId)
-            .Select(x => new PetDTO
-            {
-                Id = x.Id,
-                Name = x.Name,
-                Age = x.Age,
-                Gender = x.Gender,
-                KindOfAnimal = x.KindOfAnimal,
-                Breed = x.Breed,
-                DateOfTaking = x.DateOfTaking,
-                OwnerId = x.Owner.Id,
-                OwnerName = x.Owner.Name,
-                OwnerSurName = x.Owner.SurName,
-                OwnerAddress = x.Owner.Address,
-                PetShelterId = x.PetShelter.Id,
-                PetShelterAddress = x.PetShelter.Address
-            }).ToListAsync();
-
-            return pets;
-        }*/
-
         public ValueTask<EntityEntry<Pet>> AddPet(Pet pet)
         {
             return _context.Pets.AddAsync(pet);

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
 using ShelterRazor.DTO;
 using ShelterRazor.Models;
+using ShelterRazor.Models.Enums;
 
 namespace ShelterRazor.Interfaces
 {
@@ -10,7 +11,8 @@ namespace ShelterRazor.Interfaces
         Task<ICollection<Pet>> GetShelterPetsWithoutOwner(int shelterId);
         Task<ICollection<Pet>> GetPetsWithBreed(string breed);
         Task<Pet> GetPetById(int id);
-        IEnumerable<KindsCount> GetPetKindsCount();
+        ICollection<KindsCount> GetPetKindsCount();
+        KindsCount GetPetKindsCount(KindsOfAnimal kind);
         Task<EntityEntry<Pet>> DeletePet(int petId);
         Task<PetShelter> GetShelterById(int shelterId);
         Task UpdatePet(Pet updatedPet);
