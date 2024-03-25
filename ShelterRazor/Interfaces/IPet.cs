@@ -10,6 +10,7 @@ namespace ShelterRazor.Interfaces
         Task<ICollection<Pet>> GetShelterPetsWithoutOwner(int shelterId);
         Task<ICollection<Pet>> GetPetsWithBreed(string breed);
         Task<Pet> GetPetById(int id);
+        IEnumerable<KindsCount> GetPetKindsCount();
         Task<EntityEntry<Pet>> DeletePet(int petId);
         Task<PetShelter> GetShelterById(int shelterId);
         Task UpdatePet(Pet updatedPet);

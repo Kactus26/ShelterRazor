@@ -6,13 +6,4 @@
         Dog,
         Hamster
     }
-/*    public enum Breeds
-    {
-        Haski,
-        Labrador,
-        British,
-        Siamese,
-        Jungaryk,
-        Syrian
-    }*/
 }

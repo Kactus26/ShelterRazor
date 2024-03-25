@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using ShelterRazor.Data;
-using ShelterRazor.DTO;
 using ShelterRazor.Interfaces;
 using ShelterRazor.Models;
 

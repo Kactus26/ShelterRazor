@@ -26,7 +26,6 @@
 
     </style>
     
-
     <h1 class="title">All Pets</h1>
     if (TempData["Success"] != null)
     {
@@ -34,6 +33,7 @@
             @TempData["Success"]
         </div>
     }
+    @await Component.InvokeAsync("KindsCount")
     <div class="d-flex">
         <button class="btn btn-outline-dark">Get all pets</button>
         <button class="btn btn-outline-dark">Get all pets without owners</button>

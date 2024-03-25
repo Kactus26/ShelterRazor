@@ -3,6 +3,7 @@ using ShelterRazor.Services;
 using ShelterRazor.Data;
 using ShelterRazor.Interfaces;
 using ShelterRazor.Repository;
+using ShelterRazor.ViewComponents;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,7 @@ builder.Services.AddScoped<IPet, PetRepository>();
 builder.Services.AddScoped<IProduct, ProductRepository>();
 builder.Services.AddScoped<IPetShelter, PetShelterRepository>();
 builder.Services.AddAutoMapper(typeof(MappingProfiles));
+builder.Services.AddScoped<KindsCountViewComponent>();
 builder.Services.Configure<RouteOptions>(options =>
 {
     options.LowercaseUrls = true;

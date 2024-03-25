@@ -1,0 +1,17 @@
+﻿<table class="table table-hover rounded-pill">
+    <thead>
+        <tr>
+            <th>Kind</th>
+            <th>Amount</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th>@item.KindsOfAnimal</th>
+                <th>@item.Count</th>
+            </tr>
+        }
+    </tbody>
+</table>

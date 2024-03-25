@@ -4,7 +4,6 @@ using ShelterRazor.Data;
 using ShelterRazor.DTO;
 using ShelterRazor.Interfaces;
 using ShelterRazor.Models;
-using ShelterRazor.Models.Enums;
 
 namespace ShelterRazor.Repository
 {
@@ -67,27 +66,6 @@ namespace ShelterRazor.Repository
             return await _context.Pets.Where(pet => pet.Breed.ToString() == breed).Include(pet => pet.PetShelter).Include(pet => pet.Owner).ToListAsync();
         }
 
-        /*public async Task<ICollection<PetDTO>> GetPetsWithKind(string kindOfAnimal)
-        {
-            return await _context.Pets.Where(pet => pet.KindOfAnimal.ToString() == kindOfAnimal).Include(pet => pet.PetShelter).Include(pet => pet.Owner)
-            .Select(x => new PetDTO
-            {
-                Id = x.Id,
-                Name = x.Name,
-                Age = x.Age,
-                Gender = x.Gender,
-                KindOfAnimal = x.KindOfAnimal,
-                Breed = x.Breed,
-                DateOfTaking = x.DateOfTaking,
-                OwnerId = x.Owner.Id,
-                OwnerName = x.Owner.Name,
-                OwnerSurName = x.Owner.SurName,
-                OwnerAddress = x.Owner.Address,
-                PetShelterId = x.PetShelter.Id,
-                PetShelterAddress = x.PetShelter.Address
-            }).ToListAsync();
-        }*/
-
         public async Task<PetShelter> GetShelterById(int shelterId)
         {
             return await _context.PetShelters.FirstOrDefaultAsync(x => x.Id == shelterId);
@@ -127,5 +105,15 @@ namespace ShelterRazor.Repository
                 return _context.SaveChangesAsync();
         }
 
+        public IEnumerable<KindsCount> GetPetKindsCount()
+        {
+            return _context.Pets.GroupBy(x => x.KindOfAnimal)
+                .Select(x => new KindsCount()
+                {
+                    KindsOfAnimal = x.Key,
+                    Count = x.Count()
+                }
+                );
+        }
     }
 }
