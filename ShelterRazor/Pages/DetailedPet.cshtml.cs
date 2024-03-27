@@ -115,13 +115,6 @@ namespace ShelterRazor.Pages
                 await _petRepository.UpdatePet(pet);
             }
 
-            if (Pet.OwnerId != null)
-            {
-                Owner owner = await _ownertRepository.GetOwnerById(Pet.OwnerId.Value);
-                owner.Name = Pet.OwnerName;
-                owner.Address = Pet.OwnerAddress;
-            }
-
             await _petRepository.SaveChanges();
             TempData["Success"] = "Pet was successfully updated";
 

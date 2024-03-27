@@ -25,11 +25,11 @@ namespace ShelterRazor.Pages
 
         public async Task OnGetAsync(string? filter = null)
         {
-            if (Filter == null)
-                Pets = await _petRepository.GetAllPets();
-
             switch (filter)
             {
+                case null:
+                    Pets = await _petRepository.GetAllPets();
+                    break;
                 case "all":
                     Pets = await _petRepository.GetAllPets();
                     break;
@@ -37,8 +37,6 @@ namespace ShelterRazor.Pages
                     Pets = _mapper.Map<ICollection<PetDTO>>(await _petRepository.GetPetsWithoutOwner());
                     break;
             }
-
-            Filter = filter;
         }
     }
 }

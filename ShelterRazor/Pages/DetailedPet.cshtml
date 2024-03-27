@@ -73,12 +73,18 @@
                     <div class="flex-coloumn">
                         @if (Model.Pet.OwnerName != null)
                         {
-                            <span>Date of taking:</span>
-                            <input class="card-title" asp-for="Pet.DateOfTaking"/>
-                            <span>Owner name:</span>
-                            <input class="card-title" asp-for="Pet.OwnerName"/>
-                            <span>Owner address:</span>
-                            <input class="card-title" asp-for="Pet.OwnerAddress"/>
+                            <div style="margin-top:10%;">
+                                <span>Date of taking:</span><br/>
+                                <span class="card-title">@Model.Pet.DateOfTaking</span>
+                            </div>
+                            <div style="margin-top:12%;">
+                                <span>Owner name:</span><br/>
+                                <span class="card-title">@Model.Pet.OwnerSurName</span>
+                            </div>
+                            <div style="margin-top:12%;">
+                                <span>Owner address:</span><br/>
+                                <span class="card-title">@Model.Pet.OwnerAddress</span>
+                            </div>
                         }
                     </div>
                 }
