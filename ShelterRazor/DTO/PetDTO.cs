@@ -22,6 +22,12 @@ namespace ShelterRazor.DTO
         public string ImgSrc { get; set; }
     }
 
+    public class PetWithOwnerDTO
+    {
+        public int Id { get; set; }
+        public Owner Owner { get; set; }
+    }
+
     public class PetWhithPetShelterDTO
     {
         public int Id { get; set; }

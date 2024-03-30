@@ -8,15 +8,8 @@ namespace ShelterRazor.Services
     {
         public MappingProfiles()
         {
-            /*            CreateMap<PetShelter, PetShelterDTO>();
-             *            
-            */
             CreateMap<PetDTO, Pet>().ReverseMap();
-            /*            CreateMap<Pet, PetDTO>();
-*/            /*CreateMap<Product, ProductsDTO>();
-            CreateMap<Pet, PetWhithPetShelterDTO>(); 
-            CreateMap<Pet, PetWhithOwnerAndShelterDTO>();*/
-
+            CreateMap<PetWithOwnerDTO, Pet>().ReverseMap();
         }
     }
 }
