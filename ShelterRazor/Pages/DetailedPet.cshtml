@@ -1,101 +1,70 @@
 ﻿@page "{id}"
 @model ShelterRazor.Pages.DetailedPetModel
 @{
-    <style>
-        .title {
-        margin-top: 70px;
-        margin-bottom: 15px;
-        text-align: center;
-        }
-        .img-param {
-        height: 250px;
-        width: 400px;
-        }
-        .card{
-        border: 1px solid;
-        border-color:black;
-        border-radius: 15px;
-        box-shadow: 5px;
-        }
-        .flex-coloumn{
-        justify-content:center;
-        display: flex;
-        flex-direction: column; 
-        }
-        .a-center{
-        justify-content:center
-        }
-        img{
-        border-radius: 8px;
-        }
-        input{
-        margin-left:10px;
-        }
-        p{
-        font-size: 22px;
-        }
-        span{
-        margin-left: 10px;
-        }
-    </style>
-    <form method="post" enctype="multipart/form-data">
-        <h1 class="title">Detailed Pet</h1>
+    <head>
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" href="~/css/detailedpet.css" />
+    </head>
+    <body>
+        <form method="post" enctype="multipart/form-data">
+            <h1 class="title">Detailed Pet</h1>
 
-        @await Component.InvokeAsync("KindsCount", new { kind = Model.Pet.KindOfAnimal })
+            @await Component.InvokeAsync("KindsCount", new { kind = Model.Pet.KindOfAnimal })
 
 
-        <div class="shadow p-3 mb-5 bg-white rounded">
-            <div class="d-flex justify-content-around">
-                @if (Model.Pet.Name != null)
-                {
-                    <img class="img-param" src="@Model.Pet.ImgSrc"/>
-                }
+            <div class="shadow p-3 mb-5 bg-white rounded">
+                <div class="d-flex justify-content-around">
+                    @if (Model.Pet.Name != null)
+                    {
+                        <img class="img-param" src="@Model.Pet.ImgSrc"/>
+                    }
 
-                <div class="flex-coloumn">
-                    <input type="hidden" asp-for="Pet.Id" />
-                    <input type="hidden" asp-for="Pet.OwnerId" />
-                    <input type="hidden" asp-for="Pet.PetShelterId" />
-                    <input type="hidden" asp-for="Pet.ImgSrc" />
-
-                    <span>Name:</span><input class="card-title" asp-for="Pet.Name" placeholder="@Model.Pet.Name" />
-                    <span>Age:</span><input class="card-title" asp-for="Pet.Age" min="0" placeholder="@Model.Pet.Age" />
-                    <span>Gender:</span><input class="card-title" asp-for="Pet.Gender" placeholder="@Model.Pet.Gender" />
-                </div>
-
-                <div class="flex-coloumn">
-                    <span>Kind:</span><select asp-for="Pet.KindOfAnimal" asp-items="Model.Kinds" style="margin-left:5%; margin-bottom:4%;"></select>
-                    <span>Breed:</span><input class="card-title" asp-for="Pet.Breed" placeholder="@Model.Pet.Breed"/>
-                    <span>Pet shelter address:</span><input class="card-title" asp-for="Pet.PetShelterAddress" placeholder="@Model.Pet.PetShelterAddress" />
-                </div>
-
-                @if (Model.Pet.Name != null)
-                {
                     <div class="flex-coloumn">
-                        @if (Model.Pet.OwnerName != null)
-                        {
-                            <div style="margin-top:10%;">
-                                <span>Date of taking:</span><br/>
-                                <span class="card-title">@Model.Pet.DateOfTaking</span>
-                            </div>
-                            <div style="margin-top:12%;">
-                                <span>Owner name:</span><br/>
-                                <span class="card-title">@Model.Pet.OwnerSurName</span>
-                            </div>
-                            <div style="margin-top:12%;">
-                                <span>Owner address:</span><br/>
-                                <span class="card-title">@Model.Pet.OwnerAddress</span>
-                            </div>
-                        }
+                        <input type="hidden" asp-for="Pet.Id" />
+                        <input type="hidden" asp-for="Pet.OwnerId" />
+                        <input type="hidden" asp-for="Pet.PetShelterId" />
+                        <input type="hidden" asp-for="Pet.ImgSrc" />
+
+                        <span>Name:</span><input class="card-title" asp-for="Pet.Name" placeholder="@Model.Pet.Name" />
+                        <span>Age:</span><input class="card-title" asp-for="Pet.Age" min="0" placeholder="@Model.Pet.Age" />
+                        <span>Gender:</span><input class="card-title" asp-for="Pet.Gender" placeholder="@Model.Pet.Gender" />
                     </div>
-                }
-            </div>
-            <div style="margin-top: 1%;" class="d-flex justify-content-around">
-                <div style="margin-left:7%;">
-                    <input asp-for="Photo" class="custom-file-input form-control"/>
+
+                    <div class="flex-coloumn">
+                        <span>Kind:</span><select asp-for="Pet.KindOfAnimal" asp-items="Model.Kinds" style="margin-left:5%; margin-bottom:4%;"></select>
+                        <span>Breed:</span><input class="card-title" asp-for="Pet.Breed" placeholder="@Model.Pet.Breed"/>
+                        <span>Pet shelter address:</span><input class="card-title" asp-for="Pet.PetShelterAddress" placeholder="@Model.Pet.PetShelterAddress" />
+                    </div>
+
+                    @if (Model.Pet.Name != null)
+                    {
+                        <div class="flex-coloumn">
+                            @if (Model.Pet.OwnerName != null)
+                            {
+                                <div style="margin-top:10%;">
+                                    <span>Date of taking:</span><br/>
+                                    <span class="card-title">@Model.Pet.DateOfTaking</span>
+                                </div>
+                                <div style="margin-top:12%;">
+                                    <span>Owner name:</span><br/>
+                                    <span class="card-title">@Model.Pet.OwnerSurName</span>
+                                </div>
+                                <div style="margin-top:12%;">
+                                    <span>Owner address:</span><br/>
+                                    <span class="card-title">@Model.Pet.OwnerAddress</span>
+                                </div>
+                            }
+                        </div>
+                    }
                 </div>
-                <button style="margin-left: 28%;" type="submit" class="btn btn-success">Save Changes</button>
-                <span class="text-danger" style="margin-top:0.5%;">@TempData["Error"]</span>
+                <div style="margin-top: 1%;" class="d-flex justify-content-around">
+                    <div style="margin-left:7%;">
+                        <input asp-for="Photo" class="custom-file-input form-control"/>
+                    </div>
+                    <button style="margin-left: 28%;" type="submit" class="btn btn-success">Save Changes</button>
+                    <span class="text-danger" style="margin-top:0.5%;">@TempData["Error"]</span>
+                </div>
             </div>
-        </div>
-    </form>
+        </form>
+    </body>
 }

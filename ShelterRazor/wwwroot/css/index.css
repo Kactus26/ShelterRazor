@@ -1,0 +1,26 @@
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+.title {
+    margin-top: 70px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.img-param {
+    height: 250px;
+    width: 400px;
+}
+
+.about-animal {
+    width: 300px;
+}
+
+.btn {
+    margin-bottom: 20px;
+}
+
+.card-group {
+    margin-bottom: 50px;
+}

@@ -1,43 +1,33 @@
 ﻿@page "{id}"
 @model ShelterRazor.Pages.AddOwnerModel
 @{
-    <style>
-        .title {
-            margin-top: 70px;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-        .d-flex{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        span{
-            margin-right: 15px;
-        }
-    </style>
+    <head>
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" href="~/css/addowner.css" />
+    </head>
+    <body>
+        <form method="post" enctype="multipart/form-data">
+            <input type="hidden" asp-for="PetId" />
 
-    <form method="post" enctype="multipart/form-data">
-        <input type="hidden" asp-for="PetId" />
+            <h1 class="title">Add owner</h1>
+            <div class="shadow p-3 mb-5 bg-white rounded">
+                <div class="d-flex justify-content-around">
+                    <div>
+                        <span>Name:</span><input class="card-title" asp-for="Owner.Name"/>
+                    </div>
+                    <div>
+                         <span>Surname:</span><input class="card-title" asp-for="Owner.SurName" />
 
-        <h1 class="title">Add owner</h1>
-        <div class="shadow p-3 mb-5 bg-white rounded">
-            <div class="d-flex justify-content-around">
-                <div>
-                    <span>Name:</span><input class="card-title" asp-for="Owner.Name"/>
+                    </div>
+                    <div>
+                         <span>Address:</span><input class="card-title" asp-for="Owner.Address" />
+                    </div>
                 </div>
-                <div>
-                     <span>Surname:</span><input class="card-title" asp-for="Owner.SurName" />
-
-                </div>
-                <div>
-                     <span>Address:</span><input class="card-title" asp-for="Owner.Address" />
+                <div class="d-flex" style="margin-top:0.5%">
+                    <button type="submit" class="btn btn-success">Save Changes</button>
+                    <span style="margin-left:1%" class="text-danger" style="margin-top:0.5%;">@TempData["Error"]</span>
                 </div>
             </div>
-            <div class="d-flex" style="margin-top:0.5%">
-                <button type="submit" class="btn btn-success">Save Changes</button>
-                <span style="margin-left:1%" class="text-danger" style="margin-top:0.5%;">@TempData["Error"]</span>
-            </div>
-        </div>
-    </form>   
+        </form>
+    </body>
 }

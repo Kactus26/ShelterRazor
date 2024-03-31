@@ -1,0 +1,15 @@
+.title {
+    margin-top: 70px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.d-flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+span {
+    margin-right: 15px;
+}

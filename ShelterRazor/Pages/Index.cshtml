@@ -1,85 +1,66 @@
 ﻿@page "{filter?}"
 @model ShelterRazor.Pages.PetsModel
 @{
-    <style>
-        .flex-wrap{
-            flex-wrap: wrap;
-        }
-        .title{
-            margin-top: 70px;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-        .img-param{
-            height: 250px;
-            width: 400px;
-        }
-        .about-animal {
-            width: 300px;
-        }
-        .btn{
-            margin-bottom: 20px;
-        }
-        .card-group{
-            margin-bottom: 50px;
-        }
-
-    </style>
-    
-    <h1 class="title">All Pets</h1>
-    if (TempData["Success"] != null)
-    {
-        <div class="alert alert-success text-center">
-            @TempData["Success"]
-        </div>
-    }
-
-    @await Component.InvokeAsync("KindsCount")
-
-    <div class="d-flex justify-content-around">
-        <a asp-page="/Index" asp-route-filter="all" class="btn btn-outline-dark">Get all pets</a>
-        <form method="get">
-            <div class="d-flex">
-                <input asp-for="Search" placeholder="Full pet breed" style="height:38px"/>
-                <button type="submit" class="btn btn-success" style="margin-left:5%">Search</button>
-            </div>
-        </form>
-        <a asp-page="/Index" asp-route-filter="withoutowners" class="btn btn-outline-dark">Get all pets without owners</a>
-    </div>
-    <div class="d-flex flex-lg-wrap justify-content-around flex-wrap">
-        @foreach (var item in Model.Pets)
+    <head>
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" href="~/css/index.css" />
+    </head>
+    <body>
+        <h1 class="title">All Pets</h1>
+        @if (TempData["Success"] != null)
         {
-            var imagesPath = $"{item.ImgSrc}";
+            <div class="alert alert-success text-center">
+                @TempData["Success"]
+            </div>
+        }
 
-            <div class="card-group">
-                <div class="card">
-                    <img class="card-img-top img-param" src="@imagesPath" alt="Pet image" />
-                    <div class="card-body">
-                        <h5 class="card-title">@item.Name</h5>
-                        <span class="card-text">Age: @item.Age</span>
-                        <span class="card-text">Gender: @item.Gender</span>
-                        <span class="card-text">Kind: @item.KindOfAnimal</span>
-                        <span class="card-text">Breed: @item.Breed</span><br />
-                        <span class="card-text">Pet shelter address: @item.PetShelterAddress</span><br />
-                        <div>
-                            @if (item.OwnerName != null)
+        @await Component.InvokeAsync("KindsCount")
+
+        <div class="d-flex justify-content-around">
+            <a asp-page="/Index" asp-route-filter="all" class="btn btn-outline-dark">Get all pets</a>
+            <form method="get">
+                <div class="d-flex">
+                    <input asp-for="Search" placeholder="Full pet breed" style="height:38px"/>
+                    <button type="submit" class="btn btn-success" style="margin-left:5%">Search</button>
+                </div>
+            </form>
+            <a asp-page="/Index" asp-route-filter="withoutowners" class="btn btn-outline-dark">Get all pets without owners</a>
+        </div>
+        <div class="d-flex flex-lg-wrap justify-content-around flex-wrap">
+            @foreach (var item in Model.Pets)
+            {
+                var imagesPath = $"{item.ImgSrc}";
+
+                <div class="card-group">
+                    <div class="card">
+                        <img class="card-img-top img-param" src="@imagesPath" alt="Pet image" />
+                        <div class="card-body">
+                            <h5 class="card-title">@item.Name</h5>
+                            <span class="card-text">Age: @item.Age</span>
+                            <span class="card-text">Gender: @item.Gender</span>
+                            <span class="card-text">Kind: @item.KindOfAnimal</span>
+                            <span class="card-text">Breed: @item.Breed</span><br />
+                            <span class="card-text">Pet shelter address: @item.PetShelterAddress</span><br />
+                            <div>
+                                @if (item.OwnerName != null)
+                                {
+                                    <span class="card-text">Date of taking: @item.DateOfTaking</span><br/>
+                                    <span class="card-text">Owner name: @item.OwnerName</span><br/>
+                                    <span class="card-text">Owner address: @item.OwnerAddress</span><br />
+                                }
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-around">
+                            @if (item.OwnerName == null)
                             {
-                                <span class="card-text">Date of taking: @item.DateOfTaking</span><br/>
-                                <span class="card-text">Owner name: @item.OwnerName</span><br/>
-                                <span class="card-text">Owner address: @item.OwnerAddress</span><br />
+                                <a asp-page="/AddOwner" asp-route-id="@item.Id" class="btn btn-success">Choose</a>
                             }
+                            <a asp-page="/DetailedPet" asp-route-id="@item.Id" class="btn btn-primary">Edit</a>
+                            <a asp-page="/DeletePet" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
                         </div>
                     </div>
-                    <div class="d-flex justify-content-around">
-                        @if (item.OwnerName == null)
-                        {
-                            <a asp-page="/AddOwner" asp-route-id="@item.Id" class="btn btn-success">Choose</a>
-                        }
-                        <a asp-page="/DetailedPet" asp-route-id="@item.Id" class="btn btn-primary">Edit</a>
-                        <a asp-page="/DeletePet" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
-                    </div>
                 </div>
-            </div>
-        }
-    </div>
+            }
+        </div>
+    </body>
 }
