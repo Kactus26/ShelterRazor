@@ -20,6 +20,9 @@ namespace ShelterRazor.Pages
 
         [BindProperty]
         public string Filter { get; set; }
+        [BindProperty(SupportsGet = true)]
+        public string Search {  get; set; }
+
 
         public ICollection<PetDTO> Pets { get; set; }
 
@@ -28,6 +31,11 @@ namespace ShelterRazor.Pages
             switch (filter)
             {
                 case null:
+                    if (Search != null)
+                    {
+                        Pets = _mapper.Map<ICollection<PetDTO>>(await _petRepository.GetPetsWithBreed(Search));
+                        break;
+                    }
                     Pets = await _petRepository.GetAllPets();
                     break;
                 case "all":
@@ -37,6 +45,7 @@ namespace ShelterRazor.Pages
                     Pets = _mapper.Map<ICollection<PetDTO>>(await _petRepository.GetPetsWithoutOwner());
                     break;
             }
+            
         }
     }
 }

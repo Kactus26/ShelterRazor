@@ -10,8 +10,6 @@ namespace ShelterRazor.Interfaces
         Task<ICollection<Pet>> GetPetsWithoutOwner();
         Task<ICollection<Pet>> GetShelterPetsWithoutOwner(int shelterId);
         Task<ICollection<Pet>> GetPetsWithBreed(string breed);
-/*        Task<ICollection<Pet>> GetPetsWithKind(string kind);//Реализовать
-*/
         Task<Pet> GetPetById(int id);
         ICollection<KindsCount> GetPetKindsCount();
         KindsCount GetPetKindsCount(KindsOfAnimal kind);
