@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ShelterRazor.DTO;
 using ShelterRazor.Interfaces;
+using ShelterRazor.Models;
 
 namespace ShelterRazor.Pages
 {
@@ -31,11 +32,6 @@ namespace ShelterRazor.Pages
             switch (filter)
             {
                 case null:
-                    if (Search != null)
-                    {
-                        Pets = _mapper.Map<ICollection<PetDTO>>(await _petRepository.GetPetsWithBreed(Search));
-                        break;
-                    }
                     Pets = await _petRepository.GetAllPets();
                     break;
                 case "all":
@@ -44,8 +40,16 @@ namespace ShelterRazor.Pages
                 case "withoutowners":
                     Pets = _mapper.Map<ICollection<PetDTO>>(await _petRepository.GetPetsWithoutOwner());
                     break;
+                default:
+                    if (Search != null)
+                    {
+                        Pets = _mapper.Map<ICollection<PetDTO>>(await _petRepository.GetPetsWithBreed(Search));
+                        break;
+                    }
+                    PetShelter petShelter = await _petRepository.GetShelter(filter);
+                    Pets = _mapper.Map<ICollection<PetDTO>>(petShelter.Pets);
+                    break;
             }
-            
         }
     }
 }

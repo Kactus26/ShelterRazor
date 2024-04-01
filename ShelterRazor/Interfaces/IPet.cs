@@ -8,7 +8,7 @@ namespace ShelterRazor.Interfaces
     public interface IPet
     {
         Task<ICollection<Pet>> GetPetsWithoutOwner();
-        Task<ICollection<Pet>> GetShelterPetsWithoutOwner(int shelterId);
+        Task<PetShelter> GetShelter(string shelterAddress);
         Task<ICollection<Pet>> GetPetsWithBreed(string breed);
         Task<Pet> GetPetById(int id);
         ICollection<KindsCount> GetPetKindsCount();

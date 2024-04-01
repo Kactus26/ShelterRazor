@@ -14,11 +14,12 @@ namespace ShelterRazor.Pages
             _shelterRepository = shelterRepository;
         }
 
-        public ICollection<PetShelter> petShelters { get; set; }
+        [BindProperty]
+        public ICollection<PetShelter> PetShelters { get; set; }
 
         public async Task OnGetAsync()
         {
-            petShelters = await _shelterRepository.PetShelters();
+            PetShelters = await _shelterRepository.PetShelters();
         }
     }
 }

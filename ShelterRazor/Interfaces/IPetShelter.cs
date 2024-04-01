@@ -9,8 +9,7 @@ namespace ShelterRazor.Interfaces
         Task<ICollection<PetShelter>> PetShelters();
         Task<PetShelter> GetShelterByAddress(string shelterAddress);
         Task<PetShelter> GetShelterById(int shelterId);
-/*        Task<ICollection<PetDTO>> PetsInShelter(int shelterId);
-*/        Task<ICollection<Product>> ProductsInShelter(int shelterId);
+        Task<ICollection<Product>> ProductsInShelter(int shelterId);
         Task<EntityEntry<PetShelter>> DeleteShelter(int shelterId);
         ValueTask<EntityEntry<Pet>> AddPet(Pet pet);
         ValueTask<EntityEntry<PetShelter>> AddPetShelter(PetShelter pet);

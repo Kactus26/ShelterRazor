@@ -57,9 +57,9 @@ namespace ShelterRazor.Repository
             return await _context.Pets.Where(pet => pet.Owner == null).Include(pet => pet.PetShelter).ToListAsync();
         }
         
-        public async Task<ICollection<Pet>> GetShelterPetsWithoutOwner(int shelterId)
+        public async Task<PetShelter> GetShelter(string shelterAddress)
         {
-            return await _context.Pets.Where(pet => pet.Owner == null && pet.PetShelter.Id == shelterId).ToListAsync();
+            return await _context.PetShelters.Include(x=>x.Pets).FirstOrDefaultAsync(x=>x.Address == shelterAddress);
         }
 
         public async Task<ICollection<Pet>> GetPetsWithBreed(string breed)
