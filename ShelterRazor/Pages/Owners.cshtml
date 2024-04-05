@@ -1,0 +1,50 @@
+﻿@page
+@model ShelterRazor.Pages.OwnersModel
+@{
+    <style>
+        .tittle{
+            margin-top: 70px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        span{
+            font-size: 18px;
+        }
+        .pets{
+            margin-left:2%;
+        }
+        .test{
+            align-items: center;
+        }
+    </style>
+    <h1 class="tittle">Owners</h1>
+    <div class="flex-lg-wrap flex-wrap d-flex" style="margin-left: -3%;">
+        @foreach (var item in Model.Owners)
+        {
+            <div class="card-group" style="width:30%; margin-left:3%;">
+                <div class="card">
+                    <div class="card-body d-flex test">
+                        <div>
+                            <span>@item.Name @item.SurName</span><br/>
+                            <span>Address: @item.Address</span><br />
+                            <span>Pets:</span>
+                            <div class="pets">
+                                @foreach(var item2 in item.Pets)
+                                {
+                                    <span>@item2.Name -</span>
+                                    <span>@item2.Breed</span>
+                                    <br />
+                                }
+                            </div>
+                        </div>
+                        <div>
+                            <a asp-asp-page="/Owners" class="btn btn-danger">Delete</a>
+                        </div>
+                    </div>
+               
+                </div>
+            </div>
+        <br />
+        }
+    </div>
+}
