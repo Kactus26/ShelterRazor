@@ -23,50 +23,5 @@ namespace ShelterRazor.Repository
         {
             return await _context.PetShelters.FirstOrDefaultAsync(x=>x.Address==shelterAddress);
         }
-
-        public async Task<PetShelter> GetShelterById(int shelterId)
-        {
-            return await _context.PetShelters.FirstOrDefaultAsync(x => x.Id == shelterId);
-        }
-
-        public async Task<bool> ShelterExists(int shelterId)
-        {
-            PetShelter shelter = await _context.PetShelters.Where(x=>x.Id == shelterId).FirstOrDefaultAsync();
-            if (shelter == null)
-                return true;
-            else
-                return false;
-        }
-
-        public async Task<ICollection<Product>> ProductsInShelter(int shelterId)
-        {
-            PetShelter petShelter = await _context.PetShelters.Include(shelter => shelter.Products).Where(x => x.Id == shelterId).FirstOrDefaultAsync();
-            return petShelter.Products;
-        }
-
-        public ValueTask<EntityEntry<Pet>> AddPet(Pet pet)
-        {
-            return _context.Pets.AddAsync(pet);
-        }
-
-        public ValueTask<EntityEntry<PetShelter>> AddPetShelter(PetShelter petShelter)
-        {
-            return _context.PetShelters.AddAsync(petShelter);
-        }
-
-        public async Task<Pet> GetPetById(int petId)
-        {
-            return await _context.Pets.FirstOrDefaultAsync(x => x.Id == petId);
-        }
-
-        public async Task<EntityEntry<PetShelter>> DeleteShelter(int shelterId)
-        {
-            return _context.PetShelters.Remove(await _context.PetShelters.FirstOrDefaultAsync(x=>x.Id==shelterId));
-        }
-
-        public Task SaveChanges()
-        {
-            return _context.SaveChangesAsync();
-        }
     }
 }

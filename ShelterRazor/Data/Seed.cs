@@ -17,21 +17,12 @@ namespace ShelterRazor.Data
                 dataContext.RemoveRange(dataContext.Owners);
                 dataContext.RemoveRange(dataContext.Pets);
                 dataContext.RemoveRange(dataContext.PetShelters);
-                dataContext.RemoveRange(dataContext.Products);
                 dataContext.SaveChanges();
             }
 
             if (!dataContext.PetShelters.Any())
             {
                 Owner twoPetsOwner = new Owner { Name = "Yurik", SurName = "Bury", Address = "9 Willow Avenue" };
-                Product twoSheltersProducts = new Product
-                {
-                    Name = "Cat house",
-                    Description = "Big fun house for your little friend",
-                    ImgSrc = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4iB5VqYMcwLTte-8_XJS0kRQasWx0v4uOwQ&usqp=CAU",
-                    Manufacturer = "HousesCompany",
-                    Value = 125.99F
-                };
 
                 var PetShelters = new List<PetShelter>()
                 {
@@ -49,12 +40,6 @@ namespace ShelterRazor.Data
                                 KindOfAnimal = KindsOfAnimal.Hamster, Breed = "Jungaryk",
                                 Owner = new Owner{ Name = "Yaroslav", SurName = "Yanovich", Address = "21 Pine Road"}}
                         },
-                        Products = new List<Product>()
-                        {
-                            new Product { Name = "Cat food", Description = "Delicious dainty for kittys", ImgSrc = "https://images.freshop.com/00023100012599/fd672f76a3efd080340e53263442ff7d_large.png",
-                                Manufacturer = "Food & co", Value = 2.59F},
-                            twoSheltersProducts
-                        },
                         ImgSrc = "https://icma.org/sites/default/files/3218_Animal%20shelter.JPG"
                     },
                     new PetShelter()
@@ -70,12 +55,6 @@ namespace ShelterRazor.Data
                             new Pet { Name = "Nibbles", Age = 1, Gender = 'M', ImgSrc = "https://cdn.shortpixel.ai/spai/q_glossy+w_1082+to_webp+ret_img/woodgreen.org.uk/wp-content/uploads/2021/11/hamster_advice_article.jpeg",
                                 KindOfAnimal = KindsOfAnimal.Hamster, Breed = "Syrian",
                                 DateOfTaking = new DateOnly(2023,10,15), Owner = twoPetsOwner}
-                        },
-                        Products = new List<Product>()
-                        {
-                            new Product { Name = "Dog food", Description = "Delicious dainty for puppies", ImgSrc = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2jOmXtPHyIJ2AEYvWYVC8d-quUU6JrCZrUicmCYfotj6L7y2nnAYuoWJq1tnzcIABkAU&usqp=CAU",
-                                Manufacturer = "Food & co", Value = 1.99F},
-                            twoSheltersProducts
                         },
                         ImgSrc = "https://dl5zpyw5k3jeb.cloudfront.net/organization-photos/25370/1/?bust=1511212639"
                     }

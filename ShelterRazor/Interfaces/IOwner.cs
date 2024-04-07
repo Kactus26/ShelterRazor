@@ -6,10 +6,7 @@ namespace ShelterRazor.Interfaces
     public interface IOwner
     {
         Task SaveChanges();
-        Task<Pet> GetPetById(int petId);
         Task<ICollection<Owner>> GetOwners();
-        Task<bool> PetHasOwner(int petId);
-        Task<Owner> GetOwnerById(int ownerId);
         Task<Owner> GetOwnerByNameAndSurname(string ownerName, string ownerSurName);
         Task<EntityEntry<Owner>> DeleteOwner(int ownerId);
         Task<Pet> GetPet(int petId);
