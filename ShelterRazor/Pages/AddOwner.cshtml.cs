@@ -48,9 +48,19 @@ namespace ShelterRazor.Pages
                 return RedirectToPage("AddOwner");
             }
 
-            await _ownerRepository.AddOwner(Owner);
-            Pet pet = await _ownerRepository.GetPet(PetId);
-            pet.Owner = Owner;
+            Owner owner = await _ownerRepository.GetOwnerByNameAndSurname(Owner.Name, Owner.SurName);
+            if (owner == null) {
+                await _ownerRepository.AddOwner(Owner);
+
+                Pet pet = await _ownerRepository.GetPet(PetId);
+                pet.Owner = Owner;
+            }
+            else
+            {
+                Pet pet = await _ownerRepository.GetPet(PetId);
+                pet.Owner = owner;
+            }
+
             await _ownerRepository.SaveChanges();
             return RedirectToPage("/Index");
         }

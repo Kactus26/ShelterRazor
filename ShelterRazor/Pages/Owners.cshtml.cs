@@ -17,9 +17,17 @@ namespace ShelterRazor.Pages
         [BindProperty]
         public ICollection<Owner> Owners { get; set; }
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync(int? id = 0)
         {
+            if (id != 0)
+            {
+                await _ownerRepository.DeleteOwner(id.Value);
+                await _ownerRepository.SaveChanges();
+                return RedirectToPage("/Owners");
+            }
+
             Owners = await _ownerRepository.GetOwners();
+            return Page();
         }
     }
 }

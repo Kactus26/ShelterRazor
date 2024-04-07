@@ -54,12 +54,24 @@ namespace ShelterRazor.Repository
 
         public async Task<EntityEntry<Owner>> DeleteOwner(int ownerId)
         {
-            return _context.Owners.Remove(await _context.Owners.FirstOrDefaultAsync(x => x.Id == ownerId));
+            Owner entitiyToDelete = await _context.Owners.FirstOrDefaultAsync(x => x.Id == ownerId);
+            List<Pet> connectedEntities = await _context.Pets.Where(x => x.Owner.Id == ownerId).ToListAsync();
+            foreach (var entity in connectedEntities)
+            {
+                entity.Owner = null;
+            }
+
+            return _context.Owners.Remove(entitiyToDelete);
         }
 
         public Task SaveChanges()
         {
             return _context.SaveChangesAsync();
+        }
+
+        public async Task<Owner> GetOwnerByNameAndSurname(string ownerName, string ownerSurName)
+        {
+            return await _context.Owners.FirstOrDefaultAsync(x => x.Name == ownerName && x.SurName == ownerSurName);
         }
     }
 }
