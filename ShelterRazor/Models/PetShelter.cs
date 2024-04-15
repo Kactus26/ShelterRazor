@@ -6,6 +6,5 @@
         public string Address { get; set; }
         public string ImgSrc { get; set; }
         public ICollection<Pet>? Pets { get; set; }
-        public ICollection<Product>? Products { get; set; }
     }
 }

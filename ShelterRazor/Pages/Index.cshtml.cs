@@ -31,9 +31,6 @@ namespace ShelterRazor.Pages
         {
             switch (filter)
             {
-                case null:
-                    Pets = await _petRepository.GetAllPets();
-                    break;
                 case "all":
                     Pets = await _petRepository.GetAllPets();
                     break;
@@ -46,8 +43,13 @@ namespace ShelterRazor.Pages
                         Pets = _mapper.Map<ICollection<PetDTO>>(await _petRepository.GetPetsWithBreed(Search));
                         break;
                     }
-                    PetShelter petShelter = await _petRepository.GetShelter(filter);
-                    Pets = _mapper.Map<ICollection<PetDTO>>(petShelter.Pets);
+                    if (filter != null)
+                    {
+                        PetShelter petShelter = await _petRepository.GetShelter(filter);
+                        Pets = _mapper.Map<ICollection<PetDTO>>(petShelter.Pets);
+                        break;
+                    }
+                    Pets = await _petRepository.GetAllPets();
                     break;
             }
         }

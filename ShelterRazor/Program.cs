@@ -12,7 +12,6 @@ builder.Services.AddTransient<Seed>();
 builder.Services.AddRazorPages();
 builder.Services.AddScoped<IOwner, OwnerRepository>();
 builder.Services.AddScoped<IPet, PetRepository>();
-builder.Services.AddScoped<IProduct, ProductRepository>();
 builder.Services.AddScoped<IPetShelter, PetShelterRepository>();
 builder.Services.AddAutoMapper(typeof(MappingProfiles));
 builder.Services.AddScoped<KindsCountViewComponent>();

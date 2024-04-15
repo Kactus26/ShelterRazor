@@ -12,7 +12,6 @@ namespace ShelterRazor.Data
 
         public DbSet<Owner> Owners { get; set; }
         public DbSet<Pet> Pets { get; set; }
-        public DbSet<Product> Products { get; set; }
         public DbSet<PetShelter> PetShelters { get; set; }
 
     }
