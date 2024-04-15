@@ -1,4 +1,5 @@
-﻿using ShelterRazor.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using ShelterRazor.Models;
 using ShelterRazor.Models.Enums;
 
 namespace ShelterRazor.Data
@@ -10,14 +11,22 @@ namespace ShelterRazor.Data
         {
             dataContext = context;
         }
-        public void SeedDataContext()
+        public async Task SeedDataContext()
         {
+            var pendingMigrations = await dataContext.Database.GetPendingMigrationsAsync();
+            if (pendingMigrations.Any())
+            {
+                await dataContext.Database.MigrateAsync();
+            }
+
             if (dataContext.PetShelters.Any())
             {
-                dataContext.RemoveRange(dataContext.Owners);
-                dataContext.RemoveRange(dataContext.Pets);
-                dataContext.RemoveRange(dataContext.PetShelters);
-                dataContext.SaveChanges();
+                //dataContext.RemoveRange(dataContext.Owners);
+                //dataContext.RemoveRange(dataContext.Pets);
+                //dataContext.RemoveRange(dataContext.PetShelters);
+                //dataContext.RemoveRange(dataContext.Products);
+                //dataContext.SaveChanges();
+                return;
             }
 
             if (!dataContext.PetShelters.Any())
