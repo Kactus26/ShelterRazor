@@ -12,7 +12,7 @@ ________________________________________________________________________________
 
 The web application is created using Razor Page technology. Data transfer via TempData has been implemented; form data validation; View Component with its own logic, reusable on different pages; data (id) transmission in the address bar. SQL Server Entity Framework database is connected, in combination with the Repository pattern. It implements all CRUD operations and uses all types of relationships between tables. Also, AutoMapper is applied here for object transformation, Dependency Injection, DTO, and MVC.
 
-After installing the repository, you will need Docker. After downloading it, open the console and write in it
+After installing the repository, you will need Docker. Open it, than open the console and write in it
 
 ```
 docker-compose up --build
